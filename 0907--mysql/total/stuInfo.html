@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>学生登录</title>
+    <style>
+        *{
+            padding:0;
+            margin: 0 auto;
+        }
+        legend{
+            width: 100px;
+            font-size: 20px;
+            text-align: center;
+        }
+        label{
+            display: inline-block;
+            width: 100px;
+        }
+        ul li{
+            list-style: none;
+            margin: 20px;
+        }
+        #login{
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<table align="center" border="1px" width="80%" cellpadding="0px" cellspacing="0">
+    <thead>
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>电话</th>
+            <th>班级</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script type="text/javascript" src="jquery2.js"></script>
+<script type="text/javascript">
+   $(function(){
+        $.get("/showStuInfo",null,function(data){
+           if(data.code){
+                switch (data.code){
+                    case 0:alert("数据库连接失败");break;
+                    case 1:alert("数据查询失败");break;
+                }
+            }else {
+                var str="";
+                $.each(data,function(index,item){
+                    str+="<tr align='center'><td>"+item.sid+"</td><td>"+item.sname+"</td><td>"+item.sex+"</td><td>"+item.age+"</td><td>"+item.tel+"</td><td>"+item.cname+"</td></tr>"
+                });
+                $("table tbody").append(str);
+           }
+        },"json");
+    });
+</script>
+</body>
+</html>

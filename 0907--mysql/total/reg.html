@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>学生注册</title>
+    <style>
+        *{
+            padding:0;
+            margin: 0 auto;
+        }
+        legend{
+            width: 100px;
+            font-size: 20px;
+            text-align: center;
+        }
+        label{
+            display: inline-block;
+            width: 100px;
+        }
+        ul li{
+            list-style: none;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>学生注册</legend>
+            <ul>
+                <li><label>班级</label>
+                    <select name="cid" id="classInfo"></select>
+                </li>
+                <li>
+                    <label for="sname">学生姓名：</label>
+                    <input type="text" name="sname" id="sname">
+                </li>
+                <li>
+                    <label for="pwd">密码：</label>
+                    <input type="password" name="pwd" id="pwd">
+                </li>
+                <li>
+                    <label for="sex">性别：</label>
+                    <input type="radio" name="sex"  value="male">男
+                    <input type="radio" name="sex"  value="fema" checked>女
+                </li>
+                <li>
+                    <label for="age">年龄：</label>
+                    <input type="text" name="age" id="age">
+                </li>
+                <li>
+                    <label for="tel">联系方式：</label>
+                    <input type="text" name="tel" id="tel">
+                </li>
+                <li>
+                    <input type="button" value="注册" onclick="checkInfo()">
+                </li>
+            </ul>
+    </fieldset>
+
+
+
+    <script type="text/javascript" src="jquery2.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //当页面加载完，向服务器发送一个请求，获得所有班级的信息
+            $.get("./getAllClassInfo",null,function(data){
+                if (data.code){
+
+                }else {
+                    var str="";
+                    $.each(data,function(index,item){
+                        str="<option value='"+item.cid+"'>"+item.cname+"</option>";
+                        $("#classInfo").append( $(str) );
+                    });
+                }
+            },"json");
+        });
+
+        function checkInfo(){
+            var cid= $.trim( $("#classInfo").val() );
+            var sname= $.trim( $("#sname").val() );
+            var sex= $.trim( $("input:checked").val()  );
+            sex=sex=="male"?"男":"女";
+            var pwd= $.trim( $("#pwd").val() );
+            var age= $.trim( $("#age").val() );
+            var tel= $.trim($("#tel").val() );
+
+            $.post("/addUser",{cid:cid,sname:sname,pwd:pwd,sex:sex,age:age,tel:tel},function(data){
+
+                data= $.trim(data);
+                if(data=="0"){
+                    alert("获取数据库连接失败，请坚持数据库连接...");
+                }else if (data=="1"){
+                    alert("注册学生信息失败");
+                }else if(data=="2"){
+                    alert("请选择性别...");
+                }else {
+                    alert("添加信息表成功，学生号为: "+data);
+                }
+                console.log("data :"+data);
+            });
+
+        }
+    </script>
+</body>
+</html>
