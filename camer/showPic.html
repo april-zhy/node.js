@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片了浏览</title>
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/camera.js"></script>
+
+</head>
+<body>
+    <h1>tupai</h1>
+    <div id="show">
+        <img src="images/1474344093598.png" />
+
+    </div>
+    <script>
+        $(function(){
+            $.get("getAllPhoto",null,function(data){
+                console.info( data );
+               if(data instanceof Array){
+                   for(var index in data){
+                       $("body").append($("<img src='images/"+data[index]+"'/>&nbsp;"));
+                   }
+               }else {
+                   alert("获取照片失败..");
+               }
+            });
+        });
+    </script>
+</body>
+</html>
