@@ -1,0 +1,12 @@
+{
+  "name": "SCM Board API文档",
+  "version": "1.0.0",
+  "title": "API",
+  "url": "http://10.133.71.30/apidoc/scm-board",
+  "sampleUrl": "http://10.133.71.30/apidoc/scm-board",
+  "forceLanguage": "zh-cn",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  }
+}

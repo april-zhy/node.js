@@ -1,0 +1,16 @@
+{
+	"service": {
+		"port": 8099
+	},
+	"upload": {
+		"host": "http://10.133.71.30",
+		"tempPath": "src/__bak__/upload",
+		"outputPath": "/work/nginx/www/upload",
+		"accessFile": "/work/nginx/www/upload/images.json"
+	},
+	"upstream": {
+		"thumbor": {
+			"hostUrl": "http://10.133.71.61:8000"
+		}
+	}
+}

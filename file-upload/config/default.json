@@ -1,0 +1,10 @@
+{
+	"service": {
+		"name": "ms-scm-board"
+	},
+	"upstream": {
+		"thumbor": {
+			"hostUrl": "http://10.133.71.61:8000"
+		}
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"service": {
+		"port": 8099
+	},
+	"upload": {
+		"host": "http://127.0.0.1",
+		"tempPath": "src/__bak__/upload",
+		"outputPath": "src/__bak__/images",
+		"accessFile": "src/__bak__/images/images.json"
+	}
+}
